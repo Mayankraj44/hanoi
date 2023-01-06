@@ -8,11 +8,16 @@ function App() {
   function pegSelect(pegNumber: number) {
     const clone = [...pegs];
     if (discPicked !== undefined) {
-      console.log(clone);
-      const newClone = clone[pegNumber].push(discPicked);
-      console.log(newClone);
-      setPegs([...clone]);
-      return setDiscPicked(undefined);
+      if (
+        clone[pegNumber]?.length === 0 ||
+        clone[pegNumber][clone[pegNumber]?.length - 1] > discPicked
+      ) {
+        const newClone = clone[pegNumber].push(discPicked);
+        console.log(newClone);
+        setDiscPicked(undefined);
+        setPegs([...clone]);
+      }
+      return;
     } else {
       const poppedDisc = clone[pegNumber].pop();
       console.log(poppedDisc);
