@@ -10,7 +10,10 @@ function App() {
           <div className="stand" />
           <div className="disc-container">
             {peg.map((disc) => (
-              <span className="disc"></span>
+              <span
+                className="disc"
+                style={{ width: 50 + 25 * disc + "px" }}
+              ></span>
             ))}
           </div>
         </div>
