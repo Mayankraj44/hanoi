@@ -1,9 +1,20 @@
 import { useState } from "react";
 import "./App.css";
 
+const NUMBER = 3;
+
 function App() {
+  const winningArray = [...Array(NUMBER).keys()].reverse();
   const [pegs, setPegs] = useState<Array<Array<number>>>([[2, 1, 0], [], []]);
   const [discPicked, setDiscPicked] = useState<number | undefined>(undefined);
+
+  function wonOrNot() {
+    let targetArray = JSON.stringify(pegs[2]);
+    let winningString = JSON.stringify(winningArray);
+    if (winningString === targetArray) {
+      console.log("YOu Won");
+    }
+  }
 
   function pegSelect(pegNumber: number) {
     const clone = [...pegs];
@@ -13,15 +24,14 @@ function App() {
         clone[pegNumber][clone[pegNumber]?.length - 1] > discPicked
       ) {
         const newClone = clone[pegNumber].push(discPicked);
-        console.log(newClone);
         setDiscPicked(undefined);
         setPegs([...clone]);
       }
+      wonOrNot();
       return;
     } else {
       const poppedDisc = clone[pegNumber].pop();
-      console.log(poppedDisc);
-      console.log(clone);
+
       setDiscPicked(poppedDisc);
       setPegs([...clone]);
     }
@@ -29,7 +39,6 @@ function App() {
 
   return (
     <>
-      <div>Peg picked</div>
       <div className="pegs-container">
         {pegs?.map((peg, pegNum) => (
           <div
