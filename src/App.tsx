@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import randomColor from "randomcolor";
 
 const NUMBER = 3;
 const colorArray = [
